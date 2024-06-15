@@ -1,11 +1,8 @@
 services:
   postgres-container:
-    container_name: postgres-database
+    container_name: postgres
     image: postgres
-    command: ["tail", "-f", "/dev/null"]
     ports: 
-      - "5433:5432" 
+      - "5432:5432" 
     environment:
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - ./volume-dados/postgres-data:/var/lib/postgresql/data
+      POSTGRES_PASSWORD: 123
