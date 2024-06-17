@@ -3,7 +3,7 @@ services:
     container_name: postgres
     image: postgres
     ports: 
-      - "5432:5432" 
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: "postgres"
     volumes:
@@ -19,12 +19,15 @@ services:
     environment: 
       PGADMIN_DEFAULT_EMAIL: "eduardomachado__@outlook.com"
       PGADMIN_DEFAULT_PASSWORD: "postgres"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ./data/pgadmin-data/pgadmin4/servers.json:/pgadmin4/servers.json
     ports:
-      - "15432:80"  
+      - "15432:80"
     networks:
       pg-network:
         aliases:
-          - host-pgadmin 
+          - host-pgadmin
 
 networks:
   pg-network:
@@ -36,4 +39,10 @@ volumes:
     driver_opts:
       type: none
       device: ./data/db_data
+      o: bind
+  pgadmin-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./data/pgadmin-data
       o: bind
