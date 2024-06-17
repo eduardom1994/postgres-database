@@ -8,6 +8,27 @@ services:
       POSTGRES_PASSWORD: "postgres"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    networks:
+      pg-network:
+        aliases:
+          - host-postgres 
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: "eduardomachado__@outlook.com"
+      PGADMIN_DEFAULT_PASSWORD: "postgres"
+    ports:
+      - "15432:80"  
+    networks:
+      pg-network:
+        aliases:
+          - host-pgadmin 
+
+networks:
+  pg-network:
+    driver: bridge
 
 volumes:
   postgres-data:
