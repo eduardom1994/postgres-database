@@ -7,4 +7,12 @@ services:
     environment:
       POSTGRES_PASSWORD: "postgres"
     volumes:
-      - ./postgres-data:/var/lib/postgresql/
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./data/db_data
+      o: bind
